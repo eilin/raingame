@@ -32,7 +32,7 @@ public class Game extends Canvas implements Runnable
 	public Game() {
 		Dimension size = new Dimension(width * scale, height * scale);
 		setPreferredSize(size);
-		
+		screen = new Screen(width, height);
 		frame = new JFrame();
 	}
 	
@@ -60,7 +60,13 @@ public class Game extends Canvas implements Runnable
 			createBufferStrategy(3);
 			return;
 		}
+		screen.render();
+		for (int i = 0; i < pixels.length; ++i) { //TODO can't we just pass a reference?
+			pixels[i] = screen.pixels[i];
+		}
+		
 		Graphics graphics = bufferStrategy.getDrawGraphics();
+		graphics.drawImage(image, 0, 0, getWidth(), getHeight(), null);
 		graphics.dispose(); //releases system resources
 		bufferStrategy.show();
 	}
