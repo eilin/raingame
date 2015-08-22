@@ -22,12 +22,14 @@ public class Game extends Canvas implements Runnable
 	public static int scale = 3;
 	
 	private JFrame frame;
+	private static String title = "Rain";
 	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 	private Screen screen;
 	
 	private Thread thread;
 	private boolean running = false;
+	private static final int UPDATES_PER_SEC = 60;
 	
 	public Game() {
 		Dimension size = new Dimension(width * scale, height * scale);
@@ -44,10 +46,32 @@ public class Game extends Canvas implements Runnable
 
 	@Override
 	public void run() {
+		long lastTime = System.nanoTime();
+		long timer = System.currentTimeMillis();
+		final double nsBetweenUpdates = 1_000_000_000.0 / UPDATES_PER_SEC;
+		double delta = 0;
+		int frames = 0;
+		int updates = 0;
 		while (running) {
+			long nowTime = System.nanoTime();
+			delta += (nowTime - lastTime) / nsBetweenUpdates;
+			lastTime = nowTime;
+			while (delta >= 1) { //if it's time to update, update()
 				update();
-				render();
+				++updates;
+				--delta;
+			}
+			render(); // else, render()
+			++frames;
+			
+			if (System.currentTimeMillis() - timer > 1000) {
+				frame.setTitle(title + " | UPS: " + updates + " FPS: " + frames);
+				timer += 1000;
+				frames = 0;
+				updates = 0;
+			}
 		}
+		stop();
 	}
 	
 	public void update() {
@@ -60,7 +84,11 @@ public class Game extends Canvas implements Runnable
 			createBufferStrategy(3);
 			return;
 		}
+		
+		screen.clear();
 		screen.render();
+		
+		//copy Screen pixels to Game pixels
 		for (int i = 0; i < pixels.length; ++i) { //TODO can't we just pass a reference?
 			pixels[i] = screen.pixels[i];
 		}
@@ -83,7 +111,7 @@ public class Game extends Canvas implements Runnable
 	public static void main(String[] args) {
 		Game game = new Game();
 		game.frame.setResizable(false);
-		game.frame.setTitle("Rain");
+		game.frame.setTitle(Game.title);
 		game.frame.add(game); 
 		game.frame.pack();
 		game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
