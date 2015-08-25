@@ -10,6 +10,7 @@ import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 
 import com.thecherno.rain.graphics.Screen;
+import com.thecherno.rain.input.Keyboard;
 /**
  * @author Edward
  *
@@ -26,6 +27,9 @@ public class Game extends Canvas implements Runnable
 	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 	private Screen screen;
+	private int xOffset, yOffset;
+	
+	private Keyboard keyboard;
 	
 	private Thread thread;
 	private boolean running = false;
@@ -36,6 +40,9 @@ public class Game extends Canvas implements Runnable
 		setPreferredSize(size);
 		screen = new Screen(width, height);
 		frame = new JFrame();
+		keyboard = new Keyboard();
+		addKeyListener(keyboard); //method from java.awt
+		xOffset = yOffset = 0;
 	}
 	
 	public synchronized void start() {
@@ -75,7 +82,11 @@ public class Game extends Canvas implements Runnable
 	}
 	
 	public void update() {
-		
+		keyboard.update();
+		if (keyboard.up) --yOffset;
+		if (keyboard.down) ++yOffset;
+		if (keyboard.left) --xOffset;
+		if (keyboard.right) ++xOffset;
 	}
 	
 	public void render() {
@@ -86,7 +97,7 @@ public class Game extends Canvas implements Runnable
 		}
 		
 		screen.clear();
-		screen.render();
+		screen.render(xOffset, yOffset);
 		
 		//copy Screen pixels to Game pixels
 		for (int i = 0; i < pixels.length; ++i) { //TODO can't we just pass a reference?
@@ -117,6 +128,7 @@ public class Game extends Canvas implements Runnable
 		game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		game.frame.setLocationRelativeTo(null); //null for centered
 		game.frame.setVisible(true); 
+		game.requestFocus();
 		game.start();
 	}
 }
