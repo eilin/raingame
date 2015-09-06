@@ -14,7 +14,7 @@ import javax.imageio.ImageIO;
 public class SpriteSheet 
 {
 	private String path;
-	private final int SIZE; //size of sprite sheet, not sprite
+	public final int SIZE; //size of sprite sheet, not sprite
 	public int[] pixels;
 	
 	public SpriteSheet(String path, int size) {
@@ -24,6 +24,9 @@ public class SpriteSheet
 		load();
 	}
 	
+	/*
+	 * Load SpriteSheet from file to memory
+	 */
 	private void load() {
 		try {
 			BufferedImage image = ImageIO.read(SpriteSheet.class.getResource(path));
@@ -32,6 +35,7 @@ public class SpriteSheet
 			image.getRGB(0, 0, width, height, pixels, 0, 0);
 		} catch (Exception e) {
 			System.out.println("ERROR: failed to load sprite sheet");
+			e.printStackTrace();
 		}
 	}
 }
