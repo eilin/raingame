@@ -38,14 +38,12 @@ public class Screen
 	
 	public void render(int xOffset, int yOffset) {
 		for (int y = 0; y < height; ++y) {
-			int yActual = y + yOffset;
-			//if (y < 0 || y >= height) break;
+			int yActual = y - yOffset;
+			if (yActual < 0 || yActual >= height) continue;
 			for (int x = 0; x < width; ++x) {
-				int xActual = x + xOffset;
-				//if (x < 0 || x >= width) break;
-				int tileIndex = ((xActual / PIXELS_IN_TILE) & MAP_SIZE_MASK) + 
-								((yActual / PIXELS_IN_TILE) & MAP_SIZE_MASK) * MAP_SIZE;
-				pixels[x + y * width] = Sprite.grass.pixels[(xActual&15) + (yActual&15) * 16]; //TODO fix magic number
+				int xActual = x - xOffset;
+				if (xActual < 0 || xActual >= width) continue;
+				pixels[xActual + yActual * width] = Sprite.grass.pixels[(x&15) + (y&15) * 16]; //TODO fix magic number
 			}
 		}
 	}

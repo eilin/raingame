@@ -128,6 +128,7 @@ public class Game extends Canvas implements Runnable
 		game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		game.frame.setLocationRelativeTo(null); //null for centered
 		game.frame.setVisible(true); 
+		game.setFocusable(true);
 		game.requestFocus();
 		game.start();
 	}
