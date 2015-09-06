@@ -18,7 +18,7 @@ public class Screen
 	public int[] tiles = new int[MAP_SIZE * MAP_SIZE]; 
 	
 	private Random random = new Random();
-	
+		
 	public Screen(int width, int height) {
 		this.width = width;
 		this.height = height;
@@ -45,7 +45,7 @@ public class Screen
 				//if (x < 0 || x >= width) break;
 				int tileIndex = ((xActual / PIXELS_IN_TILE) & MAP_SIZE_MASK) + 
 								((yActual / PIXELS_IN_TILE) & MAP_SIZE_MASK) * MAP_SIZE;
-				pixels[x + y * width] = tiles[tileIndex];
+				pixels[x + y * width] = Sprite.grass.pixels[(xActual&15) + (yActual&15) * 16]; //TODO fix magic number
 			}
 		}
 	}

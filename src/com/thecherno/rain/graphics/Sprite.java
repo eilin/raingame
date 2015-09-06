@@ -14,12 +14,15 @@ public class Sprite
 	public int[] pixels;
 	private SpriteSheet sheet;
 	
+	public static Sprite grass = new Sprite(16, 1, 0, SpriteSheet.tiles); //TODO fix magic number
+	
 	public Sprite(int size, int x, int y, SpriteSheet sheet) {
 		this.SIZE = size;
 		pixels = new int[SIZE * SIZE];
 		this.x = x * SIZE;
 		this.y = y * SIZE;
 		this.sheet = sheet;
+		load();
 	}
 	
 	/**
