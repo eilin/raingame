@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 
 import com.thecherno.rain.graphics.Screen;
 import com.thecherno.rain.input.Keyboard;
+import com.thecherno.rain.level.*;
 /**
  * @author Edward
  *
@@ -35,6 +36,8 @@ public class Game extends Canvas implements Runnable
 	private boolean running = false;
 	private static final int UPDATES_PER_SEC = 60;
 	
+	private Level level;
+	
 	public Game() {
 		Dimension size = new Dimension(width * scale, height * scale);
 		setPreferredSize(size);
@@ -43,6 +46,8 @@ public class Game extends Canvas implements Runnable
 		keyboard = new Keyboard();
 		addKeyListener(keyboard); //method from java.awt
 		xOffset = yOffset = 0;
+		
+		level = new RandomLevel(16, 16);
 	}
 	
 	public synchronized void start() {
@@ -97,7 +102,7 @@ public class Game extends Canvas implements Runnable
 		}
 		
 		screen.clear();
-		screen.render(xOffset, yOffset);
+		level.render(xOffset, yOffset, screen);
 		
 		//copy Screen pixels to Game pixels
 		for (int i = 0; i < pixels.length; ++i) { //TODO can't we just pass a reference?

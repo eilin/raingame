@@ -9,20 +9,33 @@ package com.thecherno.rain.graphics;
  */
 public class Sprite 
 {
-	private final int SIZE; //size of individual sprite
+	public final int SIZE; //size of individual sprite
 	private int x, y; //xy coordinates of top-left-corner of sprite in sheet
 	public int[] pixels;
 	private SpriteSheet sheet;
 	
-	public static Sprite grass = new Sprite(16, 1, 0, SpriteSheet.tiles); //TODO fix magic number
+	public static Sprite grass = new Sprite(16, 0, 0, SpriteSheet.tiles); //TODO fix magic number
+	public static Sprite voidSprite = new Sprite(16, 0xFF00FF);
 	
 	public Sprite(int size, int x, int y, SpriteSheet sheet) {
 		this.SIZE = size;
-		pixels = new int[SIZE * SIZE];
+		this.pixels = new int[SIZE * SIZE];
 		this.x = x * SIZE;
 		this.y = y * SIZE;
 		this.sheet = sheet;
 		load();
+	}
+	
+	public Sprite(int size, int color) {
+		this.SIZE = size;
+		this.pixels = new int[SIZE*SIZE];
+		setColor(color);
+	}
+	
+	private void setColor(int color) {
+		for (int i = 0; i < SIZE*SIZE; ++i) {
+			pixels[i] = color;
+		}
 	}
 	
 	/**
