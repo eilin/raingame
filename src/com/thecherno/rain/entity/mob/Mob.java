@@ -20,11 +20,11 @@ public abstract class Mob extends Entity
 	}
 	
 	/**
-	 * args describe the change in position of the mob
+	 * args describe the change in position and direction of the mob
 	 */
 	public void move(int delta_x, int delta_y) {
 
-		if (delta_x > 0) { direction = 1; } 
+		if (delta_x > 0) { direction = 1; } //may want to include diagonal directions
 		if (delta_x < 0) { direction = 3; }
 		if (delta_y > 0) { direction = 0; } 
 		if (delta_y < 0) { direction = 4; }

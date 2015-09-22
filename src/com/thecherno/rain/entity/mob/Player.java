@@ -26,10 +26,16 @@ public class Player extends Mob
 	}
 	
 	public void update() {
-		if (keyboard.up) { --y; }
-		if (keyboard.down) { ++y; }
-		if (keyboard.left) { --x; }
-		if (keyboard.right) { ++x; }
+		int delta_x = 0;
+		int delta_y = 0;
+		if (keyboard.up) { --delta_y; }
+		if (keyboard.down) { ++delta_y; }
+		if (keyboard.left) { --delta_x; }
+		if (keyboard.right) { ++delta_x; }
+		
+		if (delta_x != 0 || delta_y != 0) {
+			move(delta_x, delta_y); //inherited from Mob
+		}
 	}
 	
 	public void render() {
