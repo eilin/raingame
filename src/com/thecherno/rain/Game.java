@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import com.thecherno.rain.graphics.Screen;
 import com.thecherno.rain.input.Keyboard;
 import com.thecherno.rain.level.*;
+import com.thecherno.rain.entity.mob.*;
 /**
  * @author Edward
  *
@@ -28,7 +29,6 @@ public class Game extends Canvas implements Runnable
 	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 	private Screen screen;
-	private int xOffset, yOffset;
 	
 	private Keyboard keyboard;
 	
@@ -38,6 +38,8 @@ public class Game extends Canvas implements Runnable
 	
 	private Level level;
 	
+	private Player player;
+	
 	public Game() {
 		Dimension size = new Dimension(width * scale, height * scale);
 		setPreferredSize(size);
@@ -45,9 +47,9 @@ public class Game extends Canvas implements Runnable
 		frame = new JFrame();
 		keyboard = new Keyboard();
 		addKeyListener(keyboard); //method from java.awt
-		xOffset = yOffset = 0;
 		
 		level = new RandomLevel(64, 64);
+		player = new Player(keyboard);
 	}
 	
 	public synchronized void start() {
@@ -88,10 +90,7 @@ public class Game extends Canvas implements Runnable
 	
 	public void update() {
 		keyboard.update();
-		if (keyboard.up) --yOffset;
-		if (keyboard.down) ++yOffset;
-		if (keyboard.left) --xOffset;
-		if (keyboard.right) ++xOffset;
+		player.update(); //could move to a entity-updating-method later
 	}
 	
 	public void render() {
@@ -102,7 +101,7 @@ public class Game extends Canvas implements Runnable
 		}
 		
 		screen.clear();
-		level.render(xOffset, yOffset, screen);
+		level.render(player.x, player.y, screen);
 		
 		//copy Screen pixels to Game pixels
 		for (int i = 0; i < pixels.length; ++i) { //TODO can't we just pass a reference?

@@ -24,17 +24,10 @@ public abstract class Mob extends Entity
 	 */
 	public void move(int delta_x, int delta_y) {
 
-		if (delta_x > 0) {
-			direction = 1;
-		} else {
-			direction = 3;
-		}
-		
-		if (delta_y > 0) {
-			direction = 0;
-		} else {
-			direction = 4;
-		}
+		if (delta_x > 0) { direction = 1; } 
+		if (delta_x < 0) { direction = 3; }
+		if (delta_y > 0) { direction = 0; } 
+		if (delta_y < 0) { direction = 4; }
 		
 		if (!isCollision()) {
 			x += delta_x;
