@@ -46,6 +46,10 @@ public abstract class Mob extends Entity
 		//todo
 	}
 	
+	public void render() {
+		
+	}
+	
 	private boolean isCollision() {
 		return false; //temp default for now
 	}
