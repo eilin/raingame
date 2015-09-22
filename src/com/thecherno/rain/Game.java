@@ -47,7 +47,7 @@ public class Game extends Canvas implements Runnable
 		addKeyListener(keyboard); //method from java.awt
 		xOffset = yOffset = 0;
 		
-		level = new RandomLevel(16, 16);
+		level = new RandomLevel(64, 64);
 	}
 	
 	public synchronized void start() {

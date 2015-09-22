@@ -41,7 +41,8 @@ public class Screen
 			int yAbs = y + yPosition;
 			for (int x = 0; x < tile.sprite.SIZE; ++x) {
 				int xAbs = x + xPosition;
-				if (xAbs < 0 || xAbs >= width || yAbs < 0 || yAbs >= width) break; // width?
+				if (xAbs < -tile.sprite.SIZE || xAbs >= width || yAbs < 0 || yAbs >= height) break; // width?
+				if (xAbs < 0) xAbs = 0;
 				pixels[xAbs+yAbs*width] = tile.sprite.pixels[x+y*tile.sprite.SIZE];
 			}
 		}

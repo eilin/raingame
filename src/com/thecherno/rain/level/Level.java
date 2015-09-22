@@ -49,9 +49,9 @@ public class Level
 		screen.setOffSet(xScroll, yScroll);
 		//divide by 16 to get tile percision
 		int x0 = xScroll >> 4; //left cornerpin pixel
-		int x1 = (xScroll + screen.width) >> 4; //right cornerpin pixel
+		int x1 = (xScroll + screen.width + 16) >> 4; //right cornerpin pixel + extra tile to cover rendering TODO fix magic number
 		int y0 = yScroll >> 4; //top cornerpin pixel
-		int y1 = (yScroll + screen.height) >> 4; //bottom cornerpin pixel
+		int y1 = (yScroll + screen.height + 16) >> 4; //bottom cornerpin pixel + extra tile to cover rendinger TODO fix magic number
 		
 		for (int y = y0; y < y1; ++y) {
 			for (int x = x0; x < x1; ++x) {
