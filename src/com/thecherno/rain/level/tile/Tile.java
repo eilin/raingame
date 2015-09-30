@@ -13,9 +13,13 @@ public class Tile
 {
 	public int x, y;
 	public Sprite sprite; 
-	
-	public static Tile grass = new GrassTile(Sprite.grass);
+		
 	public static Tile voidTile = new VoidTile(Sprite.voidSprite);
+	public static Tile grass = new GrassTile(Sprite.grass);
+	public static Tile grassFlowers1 = new GrassTile(Sprite.grassFlowers1);
+	public static Tile grassFlowers2 = new GrassTile(Sprite.grassFlowers2);
+	public static Tile grassSmallRocks1 = new GrassTile(Sprite.grassSmallRocks1);
+	public static Tile grassSmallRocks2 = new GrassTile(Sprite.grassSmallRocks2);
 	
 	public Tile(Sprite sprite) {
 		this.sprite = sprite;

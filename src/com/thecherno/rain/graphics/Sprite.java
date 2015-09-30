@@ -13,10 +13,19 @@ public class Sprite
 	private int x, y; //xy coordinates of top-left-corner of sprite in sheet
 	public int[] pixels;
 	private SpriteSheet sheet;
-	
+		
+	public static Sprite voidSprite = new Sprite(16, 0x000000);
 	public static Sprite grass = new Sprite(16, 0, 0, SpriteSheet.tiles); //TODO fix magic number
-	public static Sprite voidSprite = new Sprite(16, 0xFF00FF);
+	public static Sprite grassFlowers1 = new Sprite(16, 1, 0, SpriteSheet.tiles);
+	public static Sprite grassFlowers2 = new Sprite(16, 1, 1, SpriteSheet.tiles);
+	public static Sprite grassSmallRocks1 = new Sprite(16, 2, 0, SpriteSheet.tiles);
+	public static Sprite grassSmallRocks2 = new Sprite(16, 2, 1, SpriteSheet.tiles);
 	
+	/**
+	 * @param size: is measured in pixels
+	 * @param x: x coordinate of image in terms of sequential number
+	 * @param y: y coordinate of image in terms of sequential number  
+	 */
 	public Sprite(int size, int x, int y, SpriteSheet sheet) {
 		this.SIZE = size;
 		this.pixels = new int[SIZE * SIZE];
@@ -25,7 +34,7 @@ public class Sprite
 		this.sheet = sheet;
 		load();
 	}
-	
+
 	public Sprite(int size, int color) {
 		this.SIZE = size;
 		this.pixels = new int[SIZE*SIZE];

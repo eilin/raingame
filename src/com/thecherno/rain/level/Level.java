@@ -65,6 +65,10 @@ public class Level
 		int tileId = tiles[x+y*width];
 		switch(tileId) {
 		case 0: return Tile.grass;
+		case 1: return Tile.grassFlowers1;
+		case 2: return Tile.grassFlowers2;
+		case 3: return Tile.grassSmallRocks1;
+		case 4: return Tile.grassSmallRocks2;
 		default: return Tile.voidTile;
 		}
 	}
