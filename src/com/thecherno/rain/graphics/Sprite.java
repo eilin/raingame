@@ -21,10 +21,10 @@ public class Sprite
 	public static Sprite grassSmallRocks1 = new Sprite(16, 2, 0, SpriteSheet.tiles);
 	public static Sprite grassSmallRocks2 = new Sprite(16, 2, 1, SpriteSheet.tiles);
 	
-	public static Sprite player0 = new Sprite(16, 0, 10, SpriteSheet.tiles);
-	public static Sprite player1 = new Sprite(16, 1, 10, SpriteSheet.tiles);
-	public static Sprite player2 = new Sprite(16, 0, 11, SpriteSheet.tiles);
-	public static Sprite player3 = new Sprite(16, 1, 11, SpriteSheet.tiles);
+	public static Sprite player0 = new Sprite(16, 12, 8, SpriteSheet.tiles);
+	public static Sprite player1 = new Sprite(16, 13, 8, SpriteSheet.tiles);
+	public static Sprite player2 = new Sprite(16, 12, 9, SpriteSheet.tiles);
+	public static Sprite player3 = new Sprite(16, 13, 9, SpriteSheet.tiles);
 	
 	/**
 	 * @param size: is measured in pixels

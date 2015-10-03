@@ -57,7 +57,7 @@ public class Screen
 				int xAbs = x + xPosition;
 				if (xAbs < -16 || xAbs >= width || yAbs < 0 || yAbs >= height) break; // width?
 				if (xAbs < 0) xAbs = 0;
-				if (sprite.pixels[x+y*16] != 0xFFFF00FF) {
+				if (sprite.pixels[x+y*16] != 0xFFFF00FF && sprite.pixels[x+y*16] != 0x00FFFFFF) {
 					pixels[xAbs+yAbs*width] = sprite.pixels[x+y*16];
 				}
 			}
