@@ -100,8 +100,11 @@ public class Game extends Canvas implements Runnable
 			return;
 		}
 		
+		int playerLocationOnScreenX = player.x - screen.width/2;
+		int playerLocationOnScreenY = player.y - screen.height/2;
 		screen.clear();
-		level.render(player.x, player.y, screen);
+		level.render(playerLocationOnScreenX, playerLocationOnScreenY, screen);
+		player.render(screen);
 		
 		//copy Screen pixels to Game pixels
 		for (int i = 0; i < pixels.length; ++i) { //TODO can't we just pass a reference?

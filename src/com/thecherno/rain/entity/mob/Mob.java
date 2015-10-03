@@ -39,7 +39,7 @@ public abstract class Mob extends Entity
 		//todo
 	}
 	
-	public void render() {
+	public void render(Screen screen) {
 		
 	}
 	

@@ -48,6 +48,22 @@ public class Screen
 		}
 	}
 	
+	public void renderPlayer(int xPosition, int yPosition, Sprite sprite) {
+		xPosition -= xOffset;
+		yPosition -= yOffset;
+		for (int y = 0; y < 16; ++y) {
+			int yAbs = y + yPosition;
+			for (int x = 0; x <16; ++x) {
+				int xAbs = x + xPosition;
+				if (xAbs < -16 || xAbs >= width || yAbs < 0 || yAbs >= height) break; // width?
+				if (xAbs < 0) xAbs = 0;
+				if (sprite.pixels[x+y*16] != 0xFFFF00FF) {
+					pixels[xAbs+yAbs*width] = sprite.pixels[x+y*16];
+				}
+			}
+		}
+	}
+	
 	public void setOffSet(int xOffset, int yOffset) {
 		this.xOffset = xOffset;
 		this.yOffset = yOffset;

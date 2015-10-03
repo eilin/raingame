@@ -4,6 +4,7 @@
 package com.thecherno.rain.entity.mob;
 
 import com.thecherno.rain.input.*;
+import com.thecherno.rain.graphics.*;
 
 /**
  * @author Edward
@@ -38,7 +39,11 @@ public class Player extends Mob
 		}
 	}
 	
-	public void render() {
-		
+	public void render(Screen screen) {
+		// -16 to center player sprites
+		screen.renderPlayer(x-16, y-16, Sprite.player0);
+		screen.renderPlayer(x, y-16, Sprite.player1);
+		screen.renderPlayer(x-16, y, Sprite.player2);
+		screen.renderPlayer(x, y, Sprite.player3);
 	}
 }
